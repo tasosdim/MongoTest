@@ -18,6 +18,8 @@ object Mongo {
       "count" -> 1, "info" -> Document("x" -> 203, "y" -> 102))
 
     val observable: Observable[Completed] = collection.insertOne(doc)
+   
+     
 
     observable.subscribe(new Observer[Completed] {
 
@@ -27,6 +29,9 @@ object Mongo {
 
       override def onComplete(): Unit = println("Completed")
     })
+   observable.toFuture().onSuccess {
+    case x:Seq[Completed] => println("O Bo gamaei")
+  }
     print("xa")
   }
 }
